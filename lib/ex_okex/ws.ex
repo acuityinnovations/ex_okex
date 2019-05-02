@@ -35,10 +35,11 @@ defmodule ExOkex.Ws do
             %{channels: channels, require_auth: require_auth} = state
           ) do
         if require_auth == true do
-          login(self(), Map.get(state, :config))
+          login(self(), state)
+        else
+          subscribe(self(), channels)
         end
 
-        subscribe(self(), channels)
         send_after(self(), {:heartbeat, :ping, 1}, 20_000)
         {:ok, state}
       end
@@ -82,11 +83,15 @@ defmodule ExOkex.Ws do
         |> handle_response(state |> inc_heartbeat())
       end
 
-      def handle_frame({:binary, compressed_data}, state) do
-        compressed_data
-        |> :zlib.unzip()
-        |> Jason.decode!()
-        |> handle_response(state)
+      def handle_frame({:binary, compressed_data}, %{channels: channels} = state) do
+        case compressed_data |> :zlib.unzip() |> Jason.decode!() do
+          %{"event" => "login", "success" => true} ->
+            subscribe(self(), channels)
+            {:ok, state}
+
+          response ->
+            handle_response(response, state)
+        end
       end
 
       def handle_response(resp, state) do
@@ -112,7 +117,7 @@ defmodule ExOkex.Ws do
         send(server, {:ws_reply, {:text, params}})
       end
 
-      defp login(server, config) do
+      defp login(server, %{config: config}) do
         params = Jason.encode!(%{op: "login", args: auth_args(config)})
         send(server, {:ws_reply, {:text, params}})
       end
