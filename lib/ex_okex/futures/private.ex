@@ -105,4 +105,18 @@ defmodule ExOkex.Futures.Private do
   def get_position(instrument_id, config \\ nil) do
     get("#{@prefix}/#{instrument_id}/position", %{}, config)
   end
+
+  @doc """
+  Get the leverage of the futures account.
+
+  https://www.okex.com/docs/en/#futures-huo-qu-he-yue-bi-zhong-gang-gan-bei-shu
+
+  ## Examples
+
+      iex(3)> ExOkex.Futures.Private.get_futures_leverage("BTC")
+
+  """
+  def get_futures_leverage(currency, config \\ nil) do
+    get("#{@prefix}/accounts/#{currency}/leverage", %{}, config)
+  end
 end

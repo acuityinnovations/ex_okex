@@ -94,4 +94,25 @@ defmodule ExOkex.Futures.PrivateTest do
       end)
     end
   end
+
+  describe ".get_futures_leverage" do
+    test "returns leverage of the futures account" do
+      config = %ExOkex.Config{
+        api_key: "OKEX_API_KEY",
+        api_secret: Base.encode64("OKEX_API_SECRET"),
+        api_passphrase: "OKEX_API_PASSPHRASE"
+      }
+
+      response =
+        http_response(
+          %{"currency" => "BTC", "leverage" => "20", "margin_mode" => "crossed"},
+          200
+        )
+
+      with_mock_request(:get, response, fn ->
+        assert {:ok, %{"currency" => "BTC", "leverage" => "20", "margin_mode" => "crossed"}} ==
+                 Api.get_futures_leverage("BTC", config)
+      end)
+    end
+  end
 end
