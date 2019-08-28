@@ -5,11 +5,46 @@ defmodule ExOkex.Futures.PrivateTest do
 
   describe ".create_order" do
     test "returns placed order" do
-      response = http_response(%{"price" => "1.00"}, 201)
+      response =
+        http_response(
+          %{
+            "client_oid" => "ecbe80ef8d3a4f29aaade5831ca91ce9",
+            "error_code" => "0",
+            "error_message" => "",
+            "order_id" => "3422539729641472",
+            "result" => true
+          },
+          201
+        )
+
+      config = %ExOkex.Config{
+        api_key: "OKEX_API_KEY",
+        api_secret: Base.encode64("OKEX_API_SECRET"),
+        api_passphrase: "OKEX_API_PASSPHRASE"
+      }
 
       with_mock_request(:post, response, fn ->
-        assert {:ok, %{"price" => "1.00"}} =
-                 Api.create_order(%{side: "buy", product_id: "ETH-USD", price: "1.00"})
+        assert {:ok,
+                %{
+                  "client_oid" => "ecbe80ef8d3a4f29aaade5831ca91ce9",
+                  "error_code" => "0",
+                  "error_message" => "",
+                  "order_id" => "3422539729641472",
+                  "result" => true
+                }} ==
+                 Api.create_order(
+                   %{
+                     client_oid: "ecbe80ef8d3a4f29aaade5831ca91ce9",
+                     order_type: "1",
+                     instrument_id: "BTC-USD-190927",
+                     type: "1",
+                     price: "9000",
+                     size: "1",
+                     match_price: "0",
+                     leverage: "10"
+                   },
+                   config
+                 )
       end)
     end
   end

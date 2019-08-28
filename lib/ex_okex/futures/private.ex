@@ -19,20 +19,27 @@ defmodule ExOkex.Futures.Private do
   ## Examples
 
   iex> ExOkex.Futures.create_order(%{
+    client_oid: "y12233456",
+    order_type: "1",
     instrument_id: "BTC-USD-180213",
-    leverage: "10",
-    orders_data: [%{
-      type: "1",
-      price: "432.11",
-      size: "2",
-      match_price: "0"
-    }]
+    type: "1",
+    price: "432.11",
+    size: "2",
+    match_price: "0",
+    "leverage":"10"
   })
-  {:ok, %{"order_info" => [%{"error_code" => 0, "error_message" => "", "order_id" => "2653481276189696"}], "result" => true}}
+
+  {:ok, %{{
+    "client_oid" => "y12233456",
+    "error_code" => "0",
+    "error_message" => "",
+    "order_id" => "3422539729641472",
+    "result" => true
+  }}}
   """
   @spec create_order(params, config | nil) :: response
   def create_order(params, config \\ nil) do
-    post("#{@prefix}/orders", params, config)
+    post("#{@prefix}/order", params, config)
   end
 
   @doc """
