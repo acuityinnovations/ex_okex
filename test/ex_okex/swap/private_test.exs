@@ -94,4 +94,35 @@ defmodule ExOkex.Swap.PrivateTest do
       end)
     end
   end
+
+  describe ".get_swap_leverage" do
+    test "returns leverage of the swap account" do
+      config = %ExOkex.Config{
+        api_key: "OKEX_API_KEY",
+        api_secret: Base.encode64("OKEX_API_SECRET"),
+        api_passphrase: "OKEX_API_PASSPHRASE"
+      }
+
+      response =
+        http_response(
+          %{
+            "long_leverage" => "5.0000",
+            "short_leverage" => "5.0000",
+            "margin_mode" => "crossed",
+            "instrument_id" => "BTC-USD-SWAP"
+          },
+          200
+        )
+
+      with_mock_request(:get, response, fn ->
+        assert {:ok,
+                %{
+                  "long_leverage" => "5.0000",
+                  "short_leverage" => "5.0000",
+                  "margin_mode" => "crossed",
+                  "instrument_id" => "BTC-USD-SWAP"
+                }} == Api.get_leverage("BTC-USD-SWAP", config)
+      end)
+    end
+  end
 end
