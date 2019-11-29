@@ -105,4 +105,8 @@ defmodule ExOkex.Swap.Private do
   def get_position(instrument_id, config \\ nil) do
     get("#{@prefix}/#{instrument_id}/position", %{}, config)
   end
+
+  def get_leverage(instrument_id, config \\ nil) do
+    get("#{@prefix}/accounts/#{instrument_id}/settings", %{}, config)
+  end
 end
