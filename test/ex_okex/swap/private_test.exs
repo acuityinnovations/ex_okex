@@ -95,6 +95,75 @@ defmodule ExOkex.Swap.PrivateTest do
     end
   end
 
+  describe ".get_positions" do
+    test "returns position info" do
+      config = %ExOkex.Config{
+        api_key: "OKEX_API_KEY",
+        api_secret: Base.encode64("OKEX_API_SECRET"),
+        api_passphrase: "OKEX_API_PASSPHRASE"
+      }
+
+      response =
+        http_response(
+          [
+            %{
+              "holding" => [
+                %{
+                  "avail_position" => "1",
+                  "avg_cost" => "7802.6",
+                  "instrument_id" => "BTC-USD-SWAP",
+                  "last" => "7802.6",
+                  "leverage" => "10.00",
+                  "liquidation_price" => "0.0",
+                  "maint_margin_ratio" => "0.0050",
+                  "margin" => "0.0012",
+                  "position" => "1",
+                  "realized_pnl" => "-0.0001",
+                  "settled_pnl" => "0.0000",
+                  "settlement_price" => "7802.6",
+                  "side" => "short",
+                  "timestamp" => "2020-01-10T03:49:54.585Z",
+                  "unrealized_pnl" => "-0.0001"
+                }
+              ],
+              "margin_mode" => "crossed",
+              "timestamp" => "2020-01-10T03:49:54.585Z"
+            }
+          ],
+          200
+        )
+
+      with_mock_request(:get, response, fn ->
+        assert {:ok,
+                [
+                  %{
+                    "holding" => [
+                      %{
+                        "avail_position" => "1",
+                        "avg_cost" => "7802.6",
+                        "instrument_id" => "BTC-USD-SWAP",
+                        "last" => "7802.6",
+                        "leverage" => "10.00",
+                        "liquidation_price" => "0.0",
+                        "maint_margin_ratio" => "0.0050",
+                        "margin" => "0.0012",
+                        "position" => "1",
+                        "realized_pnl" => "-0.0001",
+                        "settled_pnl" => "0.0000",
+                        "settlement_price" => "7802.6",
+                        "side" => "short",
+                        "timestamp" => "2020-01-10T03:49:54.585Z",
+                        "unrealized_pnl" => "-0.0001"
+                      }
+                    ],
+                    "margin_mode" => "crossed",
+                    "timestamp" => "2020-01-10T03:49:54.585Z"
+                  }
+                ]} == Api.get_positions(config)
+      end)
+    end
+  end
+
   describe ".get_swap_leverage" do
     test "returns leverage of the swap account" do
       config = %ExOkex.Config{
