@@ -113,6 +113,10 @@ defmodule ExOkex.Futures.Private do
     get("#{@prefix}/#{instrument_id}/position", %{}, config)
   end
 
+  def get_positions(config \\ nil) do
+    get("#{@prefix}/position", %{}, config)
+  end
+
   @doc """
   Get the leverage of the futures account.
 
