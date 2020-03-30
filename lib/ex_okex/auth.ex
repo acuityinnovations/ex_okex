@@ -1,6 +1,12 @@
 defmodule ExOkex.Auth do
+  @moduledoc false
   @spec timestamp :: String.t()
-  def timestamp, do: (:os.system_time(:millisecond) / 1000) |> Float.to_string()
+  def timestamp do
+    time = :os.system_time(:millisecond) / 1000
+
+    time
+    |> Float.to_string()
+  end
 
   @spec sign(String.t(), String.t(), String.t(), map | [map], String.t()) :: String.t()
   def sign(timestamp, method, path, body, api_secret) do

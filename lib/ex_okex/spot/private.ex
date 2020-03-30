@@ -1,4 +1,5 @@
 defmodule ExOkex.Spot.Private do
+  @moduledoc false
   import ExOkex.Api.Private
 
   @prefix "/api/spot/v3"

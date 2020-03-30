@@ -18,15 +18,22 @@ defmodule ExOkex.Swap.Private do
 
   ## Examples
 
-  iex> ExOkex.Swap.create_order(%{
-    instrument_id: "BTC-USD-180213",
+  iex> ExOkex.Swap.Private.create_order(%{
+    instrument_id: "BTC-USD-SWAP",
     leverage: "10",
     type: "1",
     price: "432.11",
     size: "2",
     match_price: "0"
   })
-  {:ok, %{"order_info" => [%{"error_code" => 0, "error_message" => "", "order_id" => "2653481276189696"}], "result" => true}}
+  {:ok,
+   %{
+     "client_oid" => nil,
+     "error_code" => "0",
+     "error_message" => "",
+     "order_id" => "465681883218518016",
+     "result" => "true"
+   }}
   """
   @spec create_order(params, config | nil) :: response
   def create_order(params, config \\ nil) do
@@ -40,8 +47,8 @@ defmodule ExOkex.Swap.Private do
 
   ## Examples
 
-  iex> ExOkex.Swap.create_bulk_orders([
-    %{"instrument_id":"BTC-USD-180213",
+  iex> ExOkex.Swap.Private.create_bulk_orders([
+    %{"instrument_id":"BTC-USD-SWAP",
       "type":"1",
       "price":"432.11",
       "size":"2",
@@ -60,19 +67,48 @@ defmodule ExOkex.Swap.Private do
   defdelegate create_batch_orders(params, config \\ nil), to: __MODULE__, as: :create_bulk_orders
 
   @doc """
-  Cancelling an unfilled order.
+  Batch cancelling unfilled orders.
 
   https://www.okex.com/docs/en/#swap-swap---revocation
 
   ## Example
 
-      iex> ExOkex.Swap.cancel_orders("BTC-USD-180309", [1600593327162368,1600593327162369])
+      iex> ExOkex.Swap.Private.cancel_orders("BTC-USD-SWAP", [465681883218518016, 465681883218518017])
 
-      # TODO: Add response
+      %{
+        "client_oids" => [],
+        "error_code" => "0",
+        "error_message" => "",
+        "ids" => ["465681883218518016", 465681883218518017],
+        "instrument_id" => "BTC-USD-SWAP",
+        "result" => "true"
+      }}
   """
   def cancel_orders(instrument_id, order_ids \\ [], params \\ %{}, config \\ nil) do
     new_params = Map.merge(params, %{ids: order_ids})
     post("#{@prefix}/cancel_batch_orders/#{instrument_id}", new_params, config)
+  end
+
+  @doc """
+  Cancelling unfilled order.
+
+  https://www.okex.com/docs/en/#swap-swap---revocation
+
+  ## Example
+
+      iex> ExOkex.Swap.Private.cancel_order("BTC-USD-SWAP", 465681883218518016)
+
+      {:ok,
+       %{
+         "error_code" => "0",
+         "error_message" => "",
+         "order_id" => "465688276882628608",
+         "result" => "true"
+       }}
+  """
+  @spec cancel_order(charlist, charlist, config | nil) :: response
+  def cancel_order(instrument_id, order_id, config \\ nil) do
+    post("#{@prefix}/cancel_order/#{instrument_id}/#{order_id}", %{order_id: order_id}, config)
   end
 
   @doc """
@@ -82,9 +118,31 @@ defmodule ExOkex.Swap.Private do
 
   ## Examples
 
-      iex(3)> ExOkex.Swap.list_accounts()
+      iex(3)> ExOkex.Swap.Private.list_accounts()
 
-      # TODO: Add Response
+      {:ok,
+       %{
+         "info" => [
+           %{
+             "currency" => "BTC",
+             "equity" => "0.0200",
+             "fixed_balance" => "0.0000",
+             "instrument_id" => "BTC-USD-SWAP",
+             "maint_margin_ratio" => "0.0050",
+             "margin" => "0.0000",
+             "margin_frozen" => "0.0000",
+             "margin_mode" => "crossed",
+             "margin_ratio" => "10000",
+             "max_withdraw" => "0.0200",
+             "realized_pnl" => "0.0000",
+             "timestamp" => "2020-03-29T08:47:21.104Z",
+             "total_avail_balance" => "0.0200",
+             "underlying" => "BTC-USD",
+             "unrealized_pnl" => "0.0000"
+           },
+           %{
+             "currency" => "LTC",
+      ...
   """
   def list_accounts(config \\ nil) do
     get("#{@prefix}/accounts", %{}, config)
@@ -97,7 +155,7 @@ defmodule ExOkex.Swap.Private do
 
   ## Examples
 
-      iex(3)> ExOkex.Swap.get_position("BTC-USD-190329")
+      iex(3)> ExOkex.Swap.Private.get_position("BTC-USD-SWAP")
 
   """
   def get_position(instrument_id, config \\ nil) do
