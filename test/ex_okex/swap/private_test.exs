@@ -14,6 +14,26 @@ defmodule ExOkex.Swap.PrivateTest do
     end
   end
 
+  describe ".remove_order" do
+    test "returns placed order" do
+      response =
+        http_response(
+          %{
+            "error_code" => "0",
+            "error_message" => "",
+            "order_id" => "465688276882628608",
+            "result" => "true"
+          },
+          200
+        )
+
+      with_mock_request(:post, response, fn ->
+        assert {:ok, %{"order_id" => "465688276882628608"}} =
+                 Api.cancel_order("BTC-USD-SWAP", "465688276882628608")
+      end)
+    end
+  end
+
   describe ".list_accounts" do
     test "returns list of accounts" do
       response = http_response([%{"balance" => "0.00"}], 200)

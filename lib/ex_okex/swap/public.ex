@@ -1,4 +1,6 @@
 defmodule ExOkex.Swap.Public do
+  @moduledoc false
+
   import ExOkex.Api.Public
 
   @prefix "/api/swap/v3"

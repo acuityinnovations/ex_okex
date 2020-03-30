@@ -8,6 +8,7 @@ defmodule ExOkex.Ws do
   defmacro __using__(_opts) do
     quote do
       use WebSockex
+      alias ExOkex.Auth
       alias ExOkex.Config
       @base Application.get_env(:ex_okex, :ws_endpoint, "wss://real.okex.com:8443/ws/v3")
       @ping_interval Application.get_env(:ex_okex, :ping_interval, 5_000)
@@ -126,8 +127,8 @@ defmodule ExOkex.Ws do
         %{api_key: api_key, api_secret: api_secret, api_passphrase: api_passphrase} =
           Config.config_or_env_config(config)
 
-        timestamp = ExOkex.Auth.timestamp()
-        signed = ExOkex.Auth.sign(timestamp, "GET", "/users/self/verify", %{}, api_secret)
+        timestamp = Auth.timestamp()
+        signed = Auth.sign(timestamp, "GET", "/users/self/verify", %{}, api_secret)
 
         [api_key, api_passphrase, timestamp, signed]
       end

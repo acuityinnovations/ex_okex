@@ -5,6 +5,7 @@ defmodule ExOkex.Api.Private do
 
   import ExOkex.Api
   alias ExOkex.Config
+  alias ExOkex.Auth
 
   @type path :: String.t()
   @type params :: map | [map]
@@ -43,8 +44,8 @@ defmodule ExOkex.Api.Private do
   end
 
   defp headers(method, path, body, config) do
-    timestamp = ExOkex.Auth.timestamp()
-    signed = ExOkex.Auth.sign(timestamp, method, path, body, config.api_secret)
+    timestamp = Auth.timestamp()
+    signed = Auth.sign(timestamp, method, path, body, config.api_secret)
 
     [
       "Content-Type": "application/json",
