@@ -8,7 +8,7 @@ defmodule ExOkex.Futures.Private do
   import ExOkex.Api.Private
 
   @type params :: map
-  @type config :: ExOkex.Config.t()
+  @type config :: map | nil
   @type response :: ExOkex.Api.response()
 
   @prefix "/api/futures/v3"
@@ -37,7 +37,7 @@ defmodule ExOkex.Futures.Private do
     "result" => true
   }}}
   """
-  @spec create_order(params, config | nil) :: response
+  @spec create_order(params, config) :: response
   def create_order(params, config \\ nil) do
     post("#{@prefix}/order", params, config)
   end
@@ -61,7 +61,7 @@ defmodule ExOkex.Futures.Private do
     # TODO: Add response sample
 
   """
-  @spec create_bulk_orders([params], config | nil) :: response
+  @spec create_bulk_orders(params, config) :: response
   def create_bulk_orders(params, config \\ nil) do
     post("#{@prefix}/orders", params, config)
   end

@@ -8,7 +8,7 @@ defmodule ExOkex.Swap.Private do
   import ExOkex.Api.Private
 
   @type params :: map
-  @type config :: ExOkex.Config.t()
+  @type config :: map | nil
   @type response :: ExOkex.Api.response()
 
   @prefix "/api/swap/v3"
@@ -35,7 +35,7 @@ defmodule ExOkex.Swap.Private do
      "result" => "true"
    }}
   """
-  @spec create_order(params, config | nil) :: response
+  @spec create_order(params, config) :: response
   def create_order(params, config \\ nil) do
     post("#{@prefix}/order", params, config)
   end
@@ -59,7 +59,7 @@ defmodule ExOkex.Swap.Private do
     # TODO: Add response sample
 
   """
-  @spec create_bulk_orders([params], config | nil) :: response
+  @spec create_bulk_orders(params, config) :: response
   def create_bulk_orders(params, config \\ nil) do
     post("#{@prefix}/orders", params, config)
   end
@@ -106,7 +106,7 @@ defmodule ExOkex.Swap.Private do
          "result" => "true"
        }}
   """
-  @spec cancel_order(charlist, charlist, config | nil) :: response
+  @spec cancel_order(any, any, config) :: response
   def cancel_order(instrument_id, order_id, config \\ nil) do
     post("#{@prefix}/cancel_order/#{instrument_id}/#{order_id}", %{order_id: order_id}, config)
   end
