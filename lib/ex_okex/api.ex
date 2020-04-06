@@ -33,8 +33,14 @@ defmodule ExOkex.Api do
           {:ok, Jason.decode!(body)}
         else
           case Jason.decode(body) do
-            {:ok, json} -> {:error, {json["code"], json["message"]}, status_code}
-            {:error, _} -> {:error, body, status_code}
+            {:ok, %{"code" => code, "message" => message}} ->
+              {:error, {code, message}, status_code}
+
+            {:ok, %{"error_code" => code, "error_message" => message}} ->
+              {:error, {code, message}, status_code}
+
+            {:error, _} ->
+              {:error, body, status_code}
           end
         end
 
