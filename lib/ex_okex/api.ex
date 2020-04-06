@@ -1,7 +1,7 @@
 defmodule ExOkex.Api do
   @moduledoc false
   @type path :: String.t()
-  @type config :: ExOkex.Config.t()
+  @type config :: map
   @type params :: map
   @type status_code :: integer
   @type body :: term

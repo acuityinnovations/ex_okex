@@ -130,16 +130,6 @@ defmodule ExOkex.Futures.PrivateTest do
     end
   end
 
-  describe ".get_positions" do
-    test "returns position info" do
-      config = %ExOkex.Config{
-        api_key: "OKEX_API_KEY",
-        api_secret: Base.encode64("OKEX_API_SECRET"),
-        api_passphrase: "OKEX_API_PASSPHRASE"
-      }
-    end
-  end
-
   describe ".get_futures_leverage" do
     test "returns leverage of the futures account" do
       config = %ExOkex.Config{

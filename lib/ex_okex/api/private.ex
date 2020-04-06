@@ -9,10 +9,10 @@ defmodule ExOkex.Api.Private do
 
   @type path :: String.t()
   @type params :: map | [map]
-  @type config :: ExOkex.Config.t()
+  @type config :: map | nil
   @type response :: ExOkex.Api.response()
 
-  @spec get(path, params, config | nil) :: response
+  @spec get(path, params, config) :: response
   def get(path, params \\ %{}, config \\ nil) do
     config = Config.config_or_env_config(config)
     qs = query_string(path, params)
@@ -23,7 +23,7 @@ defmodule ExOkex.Api.Private do
     |> parse_response()
   end
 
-  @spec post(path, params, config | nil) :: response
+  @spec post(path, params, config) :: response
   def post(path, params \\ %{}, config \\ nil) do
     config = Config.config_or_env_config(config)
 
@@ -33,7 +33,7 @@ defmodule ExOkex.Api.Private do
     |> parse_response()
   end
 
-  @spec delete(path, config | nil) :: response
+  @spec delete(path, config) :: response
   def delete(path, config \\ nil) do
     config = Config.config_or_env_config(config)
 
