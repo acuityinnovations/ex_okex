@@ -214,4 +214,112 @@ defmodule ExOkex.Swap.PrivateTest do
       end)
     end
   end
+
+  describe ".get_open_orders" do
+    test "should return error if instrument is incorrect" do
+      config = %ExOkex.Config{
+        api_key: "OKEX_API_KEY",
+        api_secret: Base.encode64("OKEX_API_SECRET"),
+        api_passphrase: "OKEX_API_PASSPHRASE"
+      }
+
+      response =
+        http_response(%{error_code: 35001, error_message: "Contract does not exist"}, 400)
+
+      with_mock_request(:get, response, fn ->
+        assert Api.get_open_orders("BTCUSD1", config) ==
+                 {:error, {35001, "Contract does not exist"}, 400}
+      end)
+    end
+
+    test "should return all opens orders of account" do
+      config = %ExOkex.Config{
+        api_key: "OKEX_API_KEY",
+        api_secret: Base.encode64("OKEX_API_SECRET"),
+        api_passphrase: "OKEX_API_PASSPHRASE"
+      }
+
+      response =
+        http_response(
+          %{
+            "order_info" => [
+              %{
+                "client_oid" => "",
+                "contract_val" => "10",
+                "fee" => "-0.000551",
+                "filled_qty" => "1",
+                "instrument_id" => "EOS-USD-SWAP",
+                "order_id" => "6a-7-54d663a28-0",
+                "order_type" => "0",
+                "price" => "3.633",
+                "price_avg" => "3.633",
+                "size" => "1",
+                "status" => "2",
+                "state" => "2",
+                "timestamp" => "2019-03-25T05:56:21.674Z",
+                "type" => "4"
+              },
+              %{
+                "client_oid" => "",
+                "contract_val" => "10",
+                "fee" => "-0.000550",
+                "filled_qty" => "1",
+                "instrument_id" => "EOS-USD-SWAP",
+                "order_id" => "6a-8-54cee3a3f-0",
+                "order_type" => "0",
+                "price" => "3.640",
+                "price_avg" => "3.640",
+                "size" => "1",
+                "status" => "2",
+                "state" => "2",
+                "timestamp" => "2019-03-25T03:45:17.376Z",
+                "type" => "2"
+              }
+            ]
+          },
+          200
+        )
+
+      with_mock_request(:get, response, fn ->
+        assert Api.get_open_orders("BTC-USD-SWAP", config) ==
+                 {:ok,
+                  %{
+                    "order_info" => [
+                      %{
+                        "client_oid" => "",
+                        "contract_val" => "10",
+                        "fee" => "-0.000551",
+                        "filled_qty" => "1",
+                        "instrument_id" => "EOS-USD-SWAP",
+                        "order_id" => "6a-7-54d663a28-0",
+                        "order_type" => "0",
+                        "price" => "3.633",
+                        "price_avg" => "3.633",
+                        "size" => "1",
+                        "state" => "2",
+                        "status" => "2",
+                        "timestamp" => "2019-03-25T05:56:21.674Z",
+                        "type" => "4"
+                      },
+                      %{
+                        "client_oid" => "",
+                        "contract_val" => "10",
+                        "fee" => "-0.000550",
+                        "filled_qty" => "1",
+                        "instrument_id" => "EOS-USD-SWAP",
+                        "order_id" => "6a-8-54cee3a3f-0",
+                        "order_type" => "0",
+                        "price" => "3.640",
+                        "price_avg" => "3.640",
+                        "size" => "1",
+                        "state" => "2",
+                        "status" => "2",
+                        "timestamp" => "2019-03-25T03:45:17.376Z",
+                        "type" => "2"
+                      }
+                    ]
+                  }}
+      end)
+    end
+  end
 end

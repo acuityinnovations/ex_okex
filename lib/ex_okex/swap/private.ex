@@ -169,4 +169,9 @@ defmodule ExOkex.Swap.Private do
   def get_leverage(instrument_id, config \\ nil) do
     get("#{@prefix}/accounts/#{instrument_id}/settings", %{}, config)
   end
+
+  def get_open_orders(instrument_id, config \\ nil) do
+    params = %{state: 0}
+    get("#{@prefix}/orders/#{instrument_id}", params, config)
+  end
 end
