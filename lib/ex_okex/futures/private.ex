@@ -4,6 +4,7 @@ defmodule ExOkex.Futures.Private do
 
   [API docs](https://www.okex.com/docs/en/#futures-README)
   """
+  @behaviour ExOkex.ApiClientBehaviour
 
   import ExOkex.Api.Private
 
