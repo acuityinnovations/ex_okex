@@ -7,4 +7,5 @@ defmodule ExOkex.ApiClientBehaviour do
 
   @callback create_order(params, config) :: response
   @callback create_bulk_orders(params, config) :: response
+  @callback cancel_orders(String.t(), list, map, config) :: response
 end
