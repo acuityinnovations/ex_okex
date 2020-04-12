@@ -4,6 +4,7 @@ defmodule ExOkex.Swap.Private do
 
   [API docs](https://www.okex.com/docs/en/#swap-README)
   """
+  @behaviour ExOkex.ApiSwapClientBehaviour
 
   import ExOkex.Api.Private
 
