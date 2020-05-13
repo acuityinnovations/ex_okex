@@ -25,7 +25,6 @@ defmodule ExOkex.Api.Private do
 
   @spec post(path, params, config) :: response
   def post(path, params \\ %{}, config \\ nil) do
-    IO.inspect(path, label: "Hieu Hieu Hieu")
     config = Config.config_or_env_config(config)
 
     path
