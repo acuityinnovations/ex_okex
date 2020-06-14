@@ -7,6 +7,10 @@ defmodule ExOkex.Spot.Private do
   Spot account client.
   """
 
+  def get_best_ticker(instrument) do
+    get("#{@prefix}/instruments/#{instrument}/ticker", %{}, nil)
+  end
+
   @doc """
   Place a new order.
 

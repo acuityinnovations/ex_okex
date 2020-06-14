@@ -11,4 +11,8 @@ defmodule ExOkex.Futures.Public do
   def price_limit(instrument_id) do
     get("#{@prefix}/instruments/#{instrument_id}/price_limit")
   end
+
+  def get_best_ticker(instrument) do
+    get("#{@prefix}/instruments/#{instrument}/ticker")
+  end
 end
