@@ -4,7 +4,7 @@ defmodule ExOkex.Mixfile do
   def project do
     [
       app: :ex_okex,
-      version: "0.2.3",
+      version: "0.2.4",
       elixir: "~> 1.6",
       build_embedded: Mix.env() == :prod,
       start_permanent: Mix.env() == :prod,
@@ -27,6 +27,7 @@ defmodule ExOkex.Mixfile do
       {:jason, "~> 1.1"},
       {:websockex, "~> 0.4.0"},
       {:mock, "~> 0.3.3", only: :test},
+      {:exvcr, "~> 0.10.1", only: :test},
       {:credo, "~> 0.8.4", only: [:dev, :test], runtime: false},
       {:ex_doc, "~> 0.19", only: :dev, runtime: false},
       {:mix_test_watch, "~> 0.5", only: :dev, runtime: false},

@@ -21,10 +21,6 @@ defmodule ExOkex.Ws do
 
       # Callbacks
 
-      def handle_pong(:pong, state) do
-        {:ok, inc_heartbeat(state)}
-      end
-
       def handle_connect(_conn, state) do
         :ok = info("OKEX Connected!")
         send(self(), :ws_subscribe)
@@ -93,6 +89,10 @@ defmodule ExOkex.Ws do
           response ->
             handle_response(response, state)
         end
+      end
+
+      def handle_response("pong", state) do
+        {:ok, state}
       end
 
       def handle_response(resp, state) do

@@ -1,5 +1,6 @@
 defmodule ExOkex.Futures.PublicTest do
   use ExUnit.Case
+  use ExVCR.Mock, adapter: ExVCR.Adapter.Hackney
 
   import TestHelper
 
@@ -45,6 +46,28 @@ defmodule ExOkex.Futures.PublicTest do
         assert {:ok, price_limit} = Api.price_limit("BTC-USD-190927")
         price_limit == current_price_limit
       end)
+    end
+  end
+
+  describe "get" do
+    test "best ticker" do
+      use_cassette "futures/get_best_ticker" do
+        assert Api.get_best_ticker("BTC-USD-200619") ==
+                 {:ok,
+                  %{
+                    "best_ask" => "9060.49",
+                    "best_ask_size" => "2",
+                    "best_bid" => "9060.34",
+                    "best_bid_size" => "45",
+                    "high_24h" => "9452.83",
+                    "instrument_id" => "BTC-USD-200619",
+                    "last" => "9060.95",
+                    "last_qty" => "48",
+                    "low_24h" => "8898.44",
+                    "timestamp" => "2020-06-15T07:29:36.768Z",
+                    "volume_24h" => "1641044"
+                  }}
+      end
     end
   end
 end

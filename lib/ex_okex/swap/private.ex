@@ -64,7 +64,8 @@ defmodule ExOkex.Swap.Private do
     post("#{@prefix}/orders", params, config)
   end
 
-  defdelegate create_batch_orders(params, config \\ nil), to: __MODULE__, as: :create_bulk_orders
+  defdelegate create_batch_orders(params, config \\ nil),
+    to: __MODULE__, as: :create_bulk_orders
 
   @doc """
   Batch cancelling unfilled orders.

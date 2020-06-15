@@ -1,4 +1,4 @@
-defmodule ExOkex.Futures.PrivateTest do
+defmodule ExOkex.Futures.MarginTest do
   use ExUnit.Case, async: true
   import TestHelper
   alias ExOkex.Margin.Private, as: Api

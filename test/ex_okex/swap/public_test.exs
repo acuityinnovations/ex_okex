@@ -1,5 +1,6 @@
 defmodule ExOkex.Swap.PublicTest do
   use ExUnit.Case
+  use ExVCR.Mock, adapter: ExVCR.Adapter.Hackney
 
   import TestHelper
 
@@ -44,6 +45,28 @@ defmodule ExOkex.Swap.PublicTest do
         assert {:ok, price_limit} = Api.price_limit("BTC-USD-SWAP")
         price_limit == current_price_limit
       end)
+    end
+  end
+
+  describe "get" do
+    test "best ticker" do
+      use_cassette "swap/get_best_ticker" do
+        assert Api.get_best_ticker("BTC-USD-SWAP") ==
+                 {:ok,
+                  %{
+                    "best_ask" => "9063.2",
+                    "best_ask_size" => "63",
+                    "best_bid" => "9063.1",
+                    "best_bid_size" => "722",
+                    "high_24h" => "9440",
+                    "instrument_id" => "BTC-USD-SWAP",
+                    "last" => "9063.1",
+                    "last_qty" => "2",
+                    "low_24h" => "8891.2",
+                    "timestamp" => "2020-06-15T07:40:17.399Z",
+                    "volume_24h" => "4537698"
+                  }}
+      end
     end
   end
 end
