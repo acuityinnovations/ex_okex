@@ -1,0 +1,44 @@
+[
+  {
+    "request": {
+      "body": "",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "method": "get",
+      "options": [],
+      "request_body": "",
+      "url": "https://www.okex.com/api/spot/v3/instruments/BTC-USDT/ticker"
+    },
+    "response": {
+      "binary": false,
+      "body": "{\"best_ask\":\"9095.5\",\"best_bid\":\"9095.4\",\"instrument_id\":\"BTC-USDT\",\"product_id\":\"BTC-USDT\",\"last\":\"9095.4\",\"last_qty\":\"0.05167106\",\"ask\":\"9095.5\",\"best_ask_size\":\"0.37588793\",\"bid\":\"9095.4\",\"best_bid_size\":\"6.17920015\",\"open_24h\":\"9407.6\",\"high_24h\":\"9447.5\",\"low_24h\":\"8910.4\",\"base_volume_24h\":\"54252.83721147\",\"timestamp\":\"2020-06-15T07:37:27.940Z\",\"quote_volume_24h\":\"503609901.6\"}",
+      "headers": {
+        "Date": "Mon, 15 Jun 2020 07:37:31 GMT",
+        "Content-Type": "application/json",
+        "Transfer-Encoding": "chunked",
+        "Connection": "keep-alive",
+        "Set-Cookie": "__cfduid=dc7b19ced1aaa5f9b168acfe9e29f14f61592206651; expires=Wed, 15-Jul-20 07:37:31 GMT; path=/; domain=.okex.com; HttpOnly; SameSite=Lax",
+        "Vary": "Accept-Encoding",
+        "X-Content-Type-Options": "nosniff",
+        "X-XSS-Protection": "1; mode=block",
+        "Cache-Control": "no-cache, no-store, max-age=0, must-revalidate",
+        "Pragma": "no-cache",
+        "Expires": "0",
+        "X-Frame-Options": "DENY",
+        "X-BrokerID": "0",
+        "X-Kong-Upstream-Latency": "2",
+        "X-Kong-Proxy-Latency": "0",
+        "Via": "kong/1.4.3",
+        "Strict-Transport-Security": "max-age=63072000; includeSubdomains; preload",
+        "CF-Cache-Status": "DYNAMIC",
+        "cf-request-id": "03588289c30000d06003bd9200000001",
+        "Expect-CT": "max-age=604800, report-uri=\"https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct\"",
+        "Server": "cloudflare",
+        "CF-RAY": "5a3aa0560d37d060-SGN"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]

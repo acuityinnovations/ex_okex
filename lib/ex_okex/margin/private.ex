@@ -13,6 +13,10 @@ defmodule ExOkex.Margin.Private do
 
   @prefix "/api/margin/v3"
 
+  def get_best_ticker(instrument) do
+    get("/api/spot/v3/instruments/#{instrument}/ticker", %{}, nil)
+  end
+
   @doc """
   Place a new order.
 
@@ -70,5 +74,6 @@ defmodule ExOkex.Margin.Private do
     post("#{@prefix}/batch_orders", params, config)
   end
 
-  defdelegate create_batch_orders(params, config \\ nil), to: __MODULE__, as: :create_bulk_orders
+  defdelegate create_batch_orders(params, config \\ nil),
+      to: __MODULE__, as: :create_bulk_orders
 end

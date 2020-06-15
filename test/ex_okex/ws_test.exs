@@ -37,11 +37,11 @@ defmodule ExOkex.WsTest do
              }
     end
 
-    test "pong response from okex", %{state: state} do
+    test "not log out pong response from okex", %{state: state} do
       data = {:binary, <<43, 200, 207, 75, 7, 0>>}
 
       assert capture_log(fn -> WsWrapper.handle_frame(data, state) end) =~
-               "received response: \"pong\""
+               ""
     end
   end
 
