@@ -10,7 +10,7 @@ List the Hex package in your application dependencies.
 
 ```elixir
 def deps do
-  [{:ex_okex, "~> 0.2.2"}]
+  [{:ex_okex, "~> 0.2.5"}]
 end
 ```
 

@@ -23,7 +23,7 @@ defmodule ExOkex.Ws do
 
       def handle_connect(_conn, state) do
         :ok = info("OKEX Connected!")
-        send(self(), :ws_subscribe)
+        send_after(self(), :ws_subscribe, 0)
         {:ok, state}
       end
 
