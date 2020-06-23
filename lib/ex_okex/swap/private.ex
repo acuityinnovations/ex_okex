@@ -108,8 +108,8 @@ defmodule ExOkex.Swap.Private do
        }}
   """
   @spec cancel_order(any, any, config) :: response
-  def cancel_order(instrument_id, order_id, config \\ nil) do
-    post("#{@prefix}/cancel_order/#{instrument_id}/#{order_id}", %{order_id: order_id}, config)
+  def cancel_order(instrument_id, client_oid, config \\ nil) do
+    post("#{@prefix}/cancel_order/#{instrument_id}/#{client_oid}", %{client_oid: client_oid}, config)
   end
 
   @doc """
