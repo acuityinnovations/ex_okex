@@ -64,8 +64,7 @@ defmodule ExOkex.Swap.Private do
     post("#{@prefix}/orders", params, config)
   end
 
-  defdelegate create_batch_orders(params, config \\ nil),
-    to: __MODULE__, as: :create_bulk_orders
+  defdelegate create_batch_orders(params, config \\ nil), to: __MODULE__, as: :create_bulk_orders
 
   @doc """
   Batch cancelling unfilled orders.
@@ -97,8 +96,9 @@ defmodule ExOkex.Swap.Private do
 
   ## Example
 
-      iex> ExOkex.Swap.Private.cancel_order("BTC-USD-SWAP", 465681883218518016)
-
+      iex> ExOkex.Swap.Private.cancel_order("BTC-USD-SWAP", %{order_id: 465681883218518016})
+      OR
+      iex> ExOkex.Swap.Private.cancel_order("BTC-USD-SWAP", %{client_oid: 465681883218518016})
       {:ok,
        %{
          "error_code" => "0",
@@ -108,8 +108,25 @@ defmodule ExOkex.Swap.Private do
        }}
   """
   @spec cancel_order(any, any, config) :: response
-  def cancel_order(instrument_id, order_id, config \\ nil) do
-    post("#{@prefix}/cancel_order/#{instrument_id}/#{order_id}", %{order_id: order_id}, config)
+  def cancel_order(instrument_id, params, config \\ nil) do
+    case Map.take(params, [:client_oid, :order_id]) do
+      %{client_oid: client_oid} ->
+        post(
+          "#{@prefix}/cancel_order/#{instrument_id}/#{client_oid}",
+          %{client_oid: client_oid},
+          config
+        )
+
+      %{order_id: order_id} ->
+        post(
+          "#{@prefix}/cancel_order/#{instrument_id}/#{order_id}",
+          %{order_id: order_id},
+          config
+        )
+
+      _ ->
+        {:error, "invalid params"}
+    end
   end
 
   @doc """

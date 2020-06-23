@@ -56,8 +56,7 @@ defmodule ExOkex.Spot.Private do
     post("#{@prefix}/batch_orders", params, config)
   end
 
-  defdelegate create_batch_orders(params, config \\ nil),
-      to: __MODULE__, as: :create_bulk_orders
+  defdelegate create_batch_orders(params, config \\ nil), to: __MODULE__, as: :create_bulk_orders
 
   @doc """
   Get the balance, amount available/on hold of a token in spot account.

@@ -14,7 +14,7 @@ defmodule ExOkex.Swap.PrivateTest do
     end
   end
 
-  describe ".remove_order" do
+  describe ".remove_order by order_id" do
     test "returns placed order" do
       response =
         http_response(
@@ -22,6 +22,7 @@ defmodule ExOkex.Swap.PrivateTest do
             "error_code" => "0",
             "error_message" => "",
             "order_id" => "465688276882628608",
+            "client_oid" => "oktswap6",
             "result" => "true"
           },
           200
@@ -29,7 +30,28 @@ defmodule ExOkex.Swap.PrivateTest do
 
       with_mock_request(:post, response, fn ->
         assert {:ok, %{"order_id" => "465688276882628608"}} =
-                 Api.cancel_order("BTC-USD-SWAP", "465688276882628608")
+                 Api.cancel_order("BTC-USD-SWAP", %{order_id: "465688276882628608"})
+      end)
+    end
+  end
+
+  describe ".remove_order by client_oid" do
+    test "returns placed order" do
+      response =
+        http_response(
+          %{
+            "error_code" => "0",
+            "error_message" => "",
+            "order_id" => "465688276882628608",
+            "client_oid" => "oktswap6",
+            "result" => "true"
+          },
+          200
+        )
+
+      with_mock_request(:post, response, fn ->
+        assert {:ok, %{"client_oid" => "oktswap6"}} =
+                 Api.cancel_order("BTC-USD-SWAP", %{client_oid: "oktswap6"})
       end)
     end
   end
