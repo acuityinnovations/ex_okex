@@ -29,5 +29,17 @@ defmodule ExOkex.Margin.PublicTest do
                   }}
       end
     end
+
+    test "mark price" do
+      use_cassette "margin/get_mark_price" do
+        assert Api.get_mark_price("BTC-USDT") ==
+                 {:ok,
+                  %{
+                    "instrument_id" => "BTC-USDT",
+                    "mark_price" => "9153.2",
+                    "timestamp" => "2020-07-18T08:59:56.778Z"
+                  }}
+      end
+    end
   end
 end
