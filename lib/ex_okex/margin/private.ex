@@ -13,10 +13,6 @@ defmodule ExOkex.Margin.Private do
 
   @prefix "/api/margin/v3"
 
-  def get_best_ticker(instrument) do
-    get("/api/spot/v3/instruments/#{instrument}/ticker", %{}, nil)
-  end
-
   @doc """
   Place a new order.
 
