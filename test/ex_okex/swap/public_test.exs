@@ -68,5 +68,17 @@ defmodule ExOkex.Swap.PublicTest do
                   }}
       end
     end
+
+    test "mark price" do
+      use_cassette "swap/get_mark_price" do
+        assert Api.get_mark_price("BTC-USD-SWAP") ==
+          {:ok,
+            %{
+            "instrument_id" => "BTC-USD-SWAP",
+            "mark_price" => "10261.4",
+            "timestamp" => "2020-09-04T03:44:46.235Z"
+            }}
+      end
+    end
   end
 end
