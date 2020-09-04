@@ -1,0 +1,40 @@
+[
+  {
+    "request": {
+      "body": "",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "method": "get",
+      "options": [],
+      "request_body": "",
+      "url": "https://www.okex.com/api/swap/v3/instruments/BTC-USD-SWAP/mark_price"
+    },
+    "response": {
+      "binary": false,
+      "body": "{\"instrument_id\":\"BTC-USD-SWAP\",\"mark_price\":\"10261.4\",\"timestamp\":\"2020-09-04T03:44:46.235Z\"}",
+      "headers": {
+        "Date": "Fri, 04 Sep 2020 03:44:46 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "94",
+        "Connection": "keep-alive",
+        "Set-Cookie": "__cfduid=dce928492b02fb4714dab0585f6b6ab941599191086; expires=Sun, 04-Oct-20 03:44:46 GMT; path=/; domain=.okex.com; HttpOnly; SameSite=Lax",
+        "X-Content-Type-Options": "nosniff",
+        "X-XSS-Protection": "1; mode=block",
+        "Cache-Control": "no-cache, no-store, max-age=0, must-revalidate",
+        "Pragma": "no-cache",
+        "Expires": "0",
+        "X-Frame-Options": "DENY",
+        "X-BrokerID": "0",
+        "Strict-Transport-Security": "max-age=63072000; includeSubdomains; preload",
+        "CF-Cache-Status": "DYNAMIC",
+        "cf-request-id": "04f8d08c7c0000c6f4411ce200000001",
+        "Expect-CT": "max-age=604800, report-uri=\"https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct\"",
+        "Server": "cloudflare",
+        "CF-RAY": "5cd4b6c0c9c8c6f4-SGN"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]

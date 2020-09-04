@@ -17,4 +17,8 @@ defmodule ExOkex.Swap.Public do
   def get_best_ticker(instrument) do
     get("#{@prefix}/instruments/#{instrument}/ticker")
   end
+
+  def get_mark_price(instrument) do
+    get("#{@prefix}/instruments/#{instrument}/mark_price")
+  end
 end
