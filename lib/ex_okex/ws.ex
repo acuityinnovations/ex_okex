@@ -1,7 +1,7 @@
 defmodule ExOkex.Ws do
   @moduledoc false
 
-  import Logger, only: [info: 1, warn: 1]
+  import Logger, only: [info: 1]
   import Process, only: [send_after: 3]
 
   # Client API

@@ -396,4 +396,79 @@ defmodule ExOkex.Futures.MarginTest do
       end
     end
   end
+
+  describe "Margin Leverage APIs" do
+    test "should return current leverage ratio" do
+      response =
+        http_response(
+          %{
+            "error_code" => "",
+            "error_message" => "",
+            "instrument_id" => "btc-usdt",
+            "leverage" => "20",
+            "result" => true
+          },
+          201
+        )
+
+      config = %ExOkex.Config{
+        api_key: "OKEX_API_KEY",
+        api_secret: Base.encode64("OKEX_API_SECRET"),
+        api_passphrase: "OKEX_API_PASSPHRASE"
+      }
+
+      with_mock_request(:get, response, fn ->
+        params = %{
+          instrument_id: "BTC-USDT"
+        }
+
+        assert Api.get_leverage(params, config) ==
+                 {:ok,
+                  %{
+                    "error_code" => "",
+                    "error_message" => "",
+                    "instrument_id" => "btc-usdt",
+                    "leverage" => "20",
+                    "result" => true
+                  }}
+      end)
+    end
+
+    test "should update leverage ratio" do
+      response =
+        http_response(
+          %{
+            "error_code" => "",
+            "error_message" => "",
+            "instrument_id" => "BTC-USDT",
+            "leverage" => "2",
+            "result" => true
+          },
+          201
+        )
+
+      config = %ExOkex.Config{
+        api_key: "OKEX_API_KEY",
+        api_secret: Base.encode64("OKEX_API_SECRET"),
+        api_passphrase: "OKEX_API_PASSPHRASE"
+      }
+
+      with_mock_request(:post, response, fn ->
+        params = %{
+          instrument_id: "BTC-USDT",
+          leverage: 2
+        }
+
+        assert Api.update_leverage(params, config) ==
+                 {:ok,
+                  %{
+                    "error_code" => "",
+                    "error_message" => "",
+                    "instrument_id" => "BTC-USDT",
+                    "leverage" => "2",
+                    "result" => true
+                  }}
+      end)
+    end
+  end
 end
