@@ -471,4 +471,31 @@ defmodule ExOkex.Futures.MarginTest do
       end)
     end
   end
+
+  describe "Margin Loan APIs" do
+    test "should borrow a loan" do
+      response =
+        http_response(
+          %{"borrow_id" => "6635766", "client_oid" => "", "result" => true},
+          201
+        )
+
+      config = %ExOkex.Config{
+        api_key: "OKEX_API_KEY",
+        api_secret: Base.encode64("OKEX_API_SECRET"),
+        api_passphrase: "OKEX_API_PASSPHRASE"
+      }
+
+      with_mock_request(:post, response, fn ->
+        params = %{
+          instrument_id: "BTC-USDT",
+          currency: "USDT",
+          amount: 10
+        }
+
+        assert Api.borrow(params, config) ==
+                 {:ok, %{"borrow_id" => "6635766", "client_oid" => "", "result" => true}}
+      end)
+    end
+  end
 end

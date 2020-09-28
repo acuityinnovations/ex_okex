@@ -238,4 +238,25 @@ defmodule ExOkex.Margin.Private do
     instrument_id = Map.get(params, :instrument_id)
     post("#{@prefix}/accounts/#{instrument_id}/leverage", params, config)
   end
+
+  @doc """
+  Borrowing tokens in a margin trading account.
+
+  https://www.okex.com/docs/en/#spot_leverage-borrow
+
+  ## Examples
+
+  iex> ExOkex.Margin.Private.borrow(
+      %{
+        instrument_id: "BTC-USDT",
+        currency: "USDT",
+        amount: 10
+      }, config)
+
+  {:ok, %{"borrow_id" => "6625746", "client_oid" => "", "result" => true}}
+  """
+  @spec borrow(params, config) :: response
+  def borrow(params, config \\ nil) do
+    post("#{@prefix}/accounts/borrow", params, config)
+  end
 end
