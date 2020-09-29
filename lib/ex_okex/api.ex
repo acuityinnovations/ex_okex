@@ -39,6 +39,9 @@ defmodule ExOkex.Api do
             {:ok, %{"error_code" => code, "error_message" => message}} ->
               {:error, {code, message}, status_code}
 
+            {:ok, %{"message" => message, "error_message" => error_message}} ->
+              {:error, {message, error_message}, status_code}
+
             {:error, _} ->
               {:error, body, status_code}
           end

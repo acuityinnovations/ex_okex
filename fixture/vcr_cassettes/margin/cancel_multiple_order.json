@@ -1,0 +1,44 @@
+[
+  {
+    "request": {
+      "body": "[{\"instrument_id\":\"BTC-USDT\",\"order_ids\":[\"5678198770328576\"]}]",
+      "headers": {
+        "Content-Type": "application/json",
+        "OK-ACCESS-KEY": "542d1473-71e7-436b-aaef-613ba30548cd",
+        "OK-ACCESS-SIGN": "X7h9MVDZFQHFxFegmtz60zkgPqjvx7hFete++n/XRk4=",
+        "OK-ACCESS-TIMESTAMP": "1601378747.798",
+        "OK-ACCESS-PASSPHRASE": "quan2020"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "https://www.okex.com/api/margin/v3/cancel_batch_orders"
+    },
+    "response": {
+      "binary": false,
+      "body": "{\"btc-usdt\":[{\"client_oid\":\"z12233457\",\"code\":\"0\",\"error_code\":\"0\",\"error_message\":\"\",\"message\":\"\",\"order_id\":\"5678198770328576\",\"result\":true}]}",
+      "headers": {
+        "Date": "Tue, 29 Sep 2020 11:25:47 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "145",
+        "Connection": "keep-alive",
+        "Set-Cookie": "__cfduid=dcca1162d7cbcc23308bdcddc640ad9701601378747; expires=Thu, 29-Oct-20 11:25:47 GMT; path=/; domain=.okex.com; HttpOnly; SameSite=Lax",
+        "X-Content-Type-Options": "nosniff",
+        "X-XSS-Protection": "1; mode=block",
+        "Cache-Control": "no-cache, no-store, max-age=0, must-revalidate",
+        "Pragma": "no-cache",
+        "Expires": "0",
+        "X-Frame-Options": "DENY",
+        "X-BrokerID": "0",
+        "Strict-Transport-Security": "max-age=63072000; includeSubdomains; preload",
+        "CF-Cache-Status": "DYNAMIC",
+        "cf-request-id": "057b359e1c0000c6f43bb3e200000001",
+        "Expect-CT": "max-age=604800, report-uri=\"https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct\"",
+        "Server": "cloudflare",
+        "CF-RAY": "5da558769f0cc6f4-SGN"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]
