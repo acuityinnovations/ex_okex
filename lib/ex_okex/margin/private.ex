@@ -183,4 +183,80 @@ defmodule ExOkex.Margin.Private do
   end
 
   defdelegate create_batch_orders(params, config \\ nil), to: __MODULE__, as: :create_bulk_orders
+
+  @doc """
+  Get the leverage ratio of an instrument.
+
+  https://www.okex.com/docs/en/#spot_leverage-get_leverage
+
+  ## Examples
+
+  iex> ExOkex.Margin.Private.get_leverage(
+      %{
+        instrument_id: "BTC-USDT",
+      }, config)
+
+  {:ok,
+   %{
+     "error_code" => "",
+     "error_message" => "",
+     "instrument_id" => "btc-usdt",
+     "leverage" => "20",
+     "result" => true
+   }}
+  """
+  @spec get_leverage(params, config) :: response
+  def get_leverage(params, config \\ nil) do
+    instrument_id = Map.get(params, :instrument_id)
+    get("#{@prefix}/accounts/#{instrument_id}/leverage", params, config)
+  end
+
+  @doc """
+  Set the leverage ratio of an instrument.
+
+  https://www.okex.com/docs/en/#spot_leverage-set_leverage
+
+  ## Examples
+
+  iex> ExOkex.Margin.Private.update_leverage(
+      %{
+        instrument_id: "BTC-USDT",
+        leverage: 2
+      }, config)
+
+  {:ok,
+   %{
+     "error_code" => "",
+     "error_message" => "",
+     "instrument_id" => "BTC-USDT",
+     "leverage" => "2",
+     "result" => true
+   }}
+  """
+  @spec update_leverage(params, config) :: response
+  def update_leverage(params, config \\ nil) do
+    instrument_id = Map.get(params, :instrument_id)
+    post("#{@prefix}/accounts/#{instrument_id}/leverage", params, config)
+  end
+
+  @doc """
+  Borrowing tokens in a margin trading account.
+
+  https://www.okex.com/docs/en/#spot_leverage-borrow
+
+  ## Examples
+
+  iex> ExOkex.Margin.Private.borrow(
+      %{
+        instrument_id: "BTC-USDT",
+        currency: "USDT",
+        amount: 10
+      }, config)
+
+  {:ok, %{"borrow_id" => "6625746", "client_oid" => "", "result" => true}}
+  """
+  @spec borrow(params, config) :: response
+  def borrow(params, config \\ nil) do
+    post("#{@prefix}/accounts/borrow", params, config)
+  end
 end
