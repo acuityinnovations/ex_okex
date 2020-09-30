@@ -1,5 +1,6 @@
 defmodule ExOkex.Futures.MarginTest do
   use ExUnit.Case, async: true
+  use ExVCR.Mock, adapter: ExVCR.Adapter.Hackney
   import TestHelper
   alias ExOkex.Margin.Private, as: Api
 
@@ -304,6 +305,95 @@ defmodule ExOkex.Futures.MarginTest do
                     ]
                   }}
       end)
+    end
+  end
+
+  describe "get" do
+    test "get all open orders" do
+      use_cassette "margin/get_all_open_orders" do
+        assert Api.get_open_orders("BTC-USDT") ==
+                 {:ok,
+                  [
+                    %{
+                      "client_oid" => "j12233457",
+                      "created_at" => "2020-09-29T11:28:02.357Z",
+                      "fee" => "",
+                      "fee_currency" => "",
+                      "filled_notional" => "0",
+                      "filled_size" => "0",
+                      "funds" => "",
+                      "instrument_id" => "BTC-USDT",
+                      "notional" => "",
+                      "order_id" => "5678227938108416",
+                      "order_type" => "0",
+                      "price" => "11000",
+                      "price_avg" => "0",
+                      "product_id" => "BTC-USDT",
+                      "rebate" => "",
+                      "rebate_currency" => "",
+                      "side" => "sell",
+                      "size" => "0.001",
+                      "state" => "0",
+                      "status" => "open",
+                      "timestamp" => "2020-09-29T11:28:02.357Z",
+                      "type" => "limit"
+                    }
+                  ]}
+      end
+    end
+  end
+
+  describe "cancel" do
+    test "cancel an order not found" do
+      use_cassette "margin/cancel_a_not_found_order" do
+        assert Api.cancel_order("BTC-USDT", %{client_oid: "a1234"}) ==
+                 {:ok,
+                  %{
+                    "order_id" => "-1",
+                    "result" => false,
+                    "client_oid" => "a1234",
+                    "code" => "33014",
+                    "error_code" => "33014",
+                    "error_message" => "Order does not exist",
+                    "message" => "Order does not exist"
+                  }}
+      end
+    end
+
+    test "cancel an order" do
+      use_cassette "margin/cancel_an_order" do
+        assert Api.cancel_order("BTC-USDT", %{client_oid: "a12233457"}) ==
+                 {:ok,
+                  %{
+                    "client_oid" => "a12233457",
+                    "code" => "0",
+                    "error_code" => "0",
+                    "error_message" => "",
+                    "message" => "",
+                    "order_id" => "5678168753724416",
+                    "result" => true
+                  }}
+      end
+    end
+
+    test "cancel multiple order" do
+      use_cassette "margin/cancel_multiple_order" do
+        assert Api.cancel_orders("BTC-USDT", ["5678198770328576"]) ==
+                 {:ok,
+                  %{
+                    "btc-usdt" => [
+                      %{
+                        "client_oid" => "z12233457",
+                        "code" => "0",
+                        "error_code" => "0",
+                        "error_message" => "",
+                        "message" => "",
+                        "order_id" => "5678198770328576",
+                        "result" => true
+                      }
+                    ]
+                  }}
+      end
     end
   end
 end
