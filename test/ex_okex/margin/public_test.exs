@@ -41,5 +41,23 @@ defmodule ExOkex.Margin.PublicTest do
                   }}
       end
     end
+
+    test "exchange info" do
+      use_cassette "margin/get_exchange_info" do
+        assert {:ok,
+                [
+                  %{
+                    "base_currency" => "XPO",
+                    "category" => "3",
+                    "instrument_id" => "XPO-USDT",
+                    "min_size" => "1",
+                    "quote_currency" => "USDT",
+                    "size_increment" => "0.0001",
+                    "tick_size" => "0.00001"
+                  }
+                  | _
+                ]} = Api.get_exchange_info()
+      end
+    end
   end
 end
