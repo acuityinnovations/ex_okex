@@ -45,19 +45,42 @@ defmodule ExOkex.Swap.Private do
 
   https://www.okex.com/docs/en/#swap-swap---batch
 
-  ## Examples
+  ExOkex.Swap.Private.create_bulk_orders(%{
+  instrument_id: "BTC-USD-SWAP",
+  "order-data": [
+    %{type: "1",
+      price: "15000",
+      size: "1",
+      match_price: "0",
+      leverage: "10" },
+    %{type: "1",
+      price: "16000",
+      size": "1",
+      match_price: "0",
+      leverage: "10"
+    }
+  ]})
 
-  iex> ExOkex.Swap.Private.create_bulk_orders([
-    %{"instrument_id":"BTC-USD-SWAP",
-      "type":"1",
-      "price":"432.11",
-      "size":"2",
-      "match_price":"0",
-      "leverage":"10" },
-    ])
-
-    # TODO: Add response sample
-
+  {:ok,
+   %{
+     "order_info" => [
+       %{
+         "client_oid" => "",
+         "error_code" => "0",
+         "error_message" => "Success",
+         "order_id" => "649051606122926080",
+         "result" => "true"
+       },
+       %{
+         "client_oid" => "",
+         "error_code" => "0",
+         "error_message" => "Success",
+         "order_id" => "649051606122926081",
+         "result" => "true"
+       }
+     ],
+     "result" => "true"
+   }}
   """
   @spec create_bulk_orders(params, config) :: response
   def create_bulk_orders(params, config \\ nil) do
@@ -67,22 +90,44 @@ defmodule ExOkex.Swap.Private do
   defdelegate create_batch_orders(params, config \\ nil), to: __MODULE__, as: :create_bulk_orders
 
   @doc """
+  ExOkex.Swap.Private.update_order(%{
+    instrument_id: "BTC-USD-SWAP",
+    client_oid: "q122334579",
+    new_price: "16000"
+  })
+
+  {:ok,
+   %{
+     "client_oid" => "q122334579",
+     "error_code" => "0",
+     "error_message" => "",
+     "order_id" => "",
+     "request_id" => "",
+     "result" => "true"
+   }}
+  """
+  def update_order(params, config \\ nil) do
+    instrument_id = Map.get(params, :instrument_id)
+    post("#{@prefix}/amend_order/#{instrument_id}", params, config)
+  end
+
+  @doc """
   Batch cancelling unfilled orders.
 
   https://www.okex.com/docs/en/#swap-swap---revocation
 
   ## Example
 
-      iex> ExOkex.Swap.Private.cancel_orders("BTC-USD-SWAP", [465681883218518016, 465681883218518017])
+  ExOkex.Swap.Private.cancel_orders("BTC-USD-SWAP", [465681883218518016, 465681883218518017])
 
-      %{
-        "client_oids" => [],
-        "error_code" => "0",
-        "error_message" => "",
-        "ids" => ["465681883218518016", 465681883218518017],
-        "instrument_id" => "BTC-USD-SWAP",
-        "result" => "true"
-      }}
+  %{
+    "client_oids" => [],
+    "error_code" => "0",
+    "error_message" => "",
+    "ids" => ["465681883218518016", 465681883218518017],
+    "instrument_id" => "BTC-USD-SWAP",
+    "result" => "true"
+  }}
   """
   def cancel_orders(instrument_id, order_ids \\ [], params \\ %{}, config \\ nil) do
     new_params = Map.merge(params, %{ids: order_ids})
@@ -96,16 +141,16 @@ defmodule ExOkex.Swap.Private do
 
   ## Example
 
-      iex> ExOkex.Swap.Private.cancel_order("BTC-USD-SWAP", %{order_id: 465681883218518016})
-      OR
-      iex> ExOkex.Swap.Private.cancel_order("BTC-USD-SWAP", %{client_oid: 465681883218518016})
-      {:ok,
-       %{
-         "error_code" => "0",
-         "error_message" => "",
-         "order_id" => "465688276882628608",
-         "result" => "true"
-       }}
+  ExOkex.Swap.Private.cancel_order("BTC-USD-SWAP", %{order_id: 465681883218518016})
+  OR
+  ExOkex.Swap.Private.cancel_order("BTC-USD-SWAP", %{client_oid: 465681883218518016})
+  {:ok,
+   %{
+     "error_code" => "0",
+     "error_message" => "",
+     "order_id" => "465688276882628608",
+     "result" => "true"
+   }}
   """
   @spec cancel_order(any, any, config) :: response
   def cancel_order(instrument_id, params, config \\ nil) do
@@ -136,30 +181,30 @@ defmodule ExOkex.Swap.Private do
 
   ## Examples
 
-      iex(3)> ExOkex.Swap.Private.list_accounts()
+  ExOkex.Swap.Private.list_accounts()
 
-      {:ok,
+  {:ok,
+   %{
+     "info" => [
        %{
-         "info" => [
-           %{
-             "currency" => "BTC",
-             "equity" => "0.0200",
-             "fixed_balance" => "0.0000",
-             "instrument_id" => "BTC-USD-SWAP",
-             "maint_margin_ratio" => "0.0050",
-             "margin" => "0.0000",
-             "margin_frozen" => "0.0000",
-             "margin_mode" => "crossed",
-             "margin_ratio" => "10000",
-             "max_withdraw" => "0.0200",
-             "realized_pnl" => "0.0000",
-             "timestamp" => "2020-03-29T08:47:21.104Z",
-             "total_avail_balance" => "0.0200",
-             "underlying" => "BTC-USD",
-             "unrealized_pnl" => "0.0000"
-           },
-           %{
-             "currency" => "LTC",
+         "currency" => "BTC",
+         "equity" => "0.0200",
+         "fixed_balance" => "0.0000",
+         "instrument_id" => "BTC-USD-SWAP",
+         "maint_margin_ratio" => "0.0050",
+         "margin" => "0.0000",
+         "margin_frozen" => "0.0000",
+         "margin_mode" => "crossed",
+         "margin_ratio" => "10000",
+         "max_withdraw" => "0.0200",
+         "realized_pnl" => "0.0000",
+         "timestamp" => "2020-03-29T08:47:21.104Z",
+         "total_avail_balance" => "0.0200",
+         "underlying" => "BTC-USD",
+         "unrealized_pnl" => "0.0000"
+       },
+       %{
+         "currency" => "LTC",
       ...
   """
   def list_accounts(config \\ nil) do
