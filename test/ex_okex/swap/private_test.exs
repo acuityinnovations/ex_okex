@@ -14,6 +14,32 @@ defmodule ExOkex.Swap.PrivateTest do
     end
   end
 
+  describe ".update_order" do
+    test "returns updated order" do
+      response =
+        http_response(
+          %{
+            "client_oid" => "q122334579",
+            "error_code" => "0",
+            "error_message" => "",
+            "order_id" => "",
+            "request_id" => "",
+            "result" => "true"
+          },
+          200
+        )
+
+      with_mock_request(:post, response, fn ->
+        assert {:ok, %{"client_oid" => "q122334579", "error_code" => "0"}} =
+                 Api.update_order(%{
+                   instrument_id: "BTC-USD-SWAP",
+                   client_oid: "q122334579",
+                   new_price: "16000"
+                 })
+      end)
+    end
+  end
+
   describe ".remove_order by order_id" do
     test "returns placed order" do
       response =
