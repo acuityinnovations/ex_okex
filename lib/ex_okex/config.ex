@@ -23,12 +23,14 @@ defmodule ExOkex.Config do
   end
 
   def config_or_env_config(%{
-        access_keys: [api_key_access, api_secret_access, api_passphrase_access]
+        api_key: api_key,
+        secret_key: secret_key,
+        passphrase: passphrase
       }) do
     %__MODULE__{
-      api_key: api_key(api_key_access),
-      api_secret: api_secret(api_secret_access),
-      api_passphrase: api_passphrase(api_passphrase_access),
+      api_key: api_key,
+      api_secret: secret_key,
+      api_passphrase: passphrase,
       api_url: api_url()
     }
   end
