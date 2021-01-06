@@ -8,4 +8,8 @@ defmodule ExOkex.Spot.Public do
   def get_best_ticker(instrument) do
     get("#{@prefix}/instruments/#{instrument}/ticker", %{}, nil)
   end
+
+  def get_index_price(instrument) do
+    get("/api/index/v3/#{instrument}/constituents", %{}, nil)
+  end
 end
