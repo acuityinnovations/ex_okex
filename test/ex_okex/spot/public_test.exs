@@ -29,5 +29,54 @@ defmodule ExOkex.Spot.PublicTest do
                   }}
       end
     end
+
+    test "get index price" do
+      use_cassette "spot/get_index_price" do
+        assert Api.get_index_price("ADA-BTC") ==
+                 {:ok,
+                  %{
+                    "code" => 0,
+                    "data" => %{
+                      "constituents" => [
+                        %{
+                          "exchange" => "OKEx",
+                          "original_price" => "0.00000807",
+                          "symbol" => "ADA/BTC",
+                          "usd_price" => "0.00000807",
+                          "weight" => "0.167"
+                        },
+                        %{
+                          "exchange" => "Huobi",
+                          "original_price" => "0.00000808",
+                          "symbol" => "ADA/BTC",
+                          "usd_price" => "0.00000808",
+                          "weight" => "0.167"
+                        },
+                        %{
+                          "exchange" => "Binance",
+                          "original_price" => "0.00000806",
+                          "symbol" => "ADA/BTC",
+                          "usd_price" => "0.00000806",
+                          "weight" => "0.167"
+                        },
+                        %{
+                          "exchange" => "OKEx_INDEX",
+                          "original_price" => "0.27616",
+                          "symbol" => "ADA/USDT",
+                          "usd_price" => "0.0000080562631495",
+                          "weight" => "0.500"
+                        }
+                      ],
+                      "instrument_id" => "ADA-BTC",
+                      "last" => "0.0000080631384363",
+                      "timestamp" => "2021-01-06T10:19:48.442Z"
+                    },
+                    "detailMsg" => "",
+                    "error_code" => "0",
+                    "error_message" => "",
+                    "msg" => ""
+                  }}
+      end
+    end
   end
 end
