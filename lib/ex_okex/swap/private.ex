@@ -211,6 +211,10 @@ defmodule ExOkex.Swap.Private do
     get("#{@prefix}/accounts", %{}, config)
   end
 
+  def get_account(instrument_id, config \\ nil) do
+    get("#{@prefix}/#{instrument_id}/accounts", %{}, config)
+  end
+
   @doc """
   Get the information of holding positions of a contract.
 

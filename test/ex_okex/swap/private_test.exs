@@ -106,6 +106,72 @@ defmodule ExOkex.Swap.PrivateTest do
     end
   end
 
+  describe ".get_account" do
+    test "accepts dynamically specified config" do
+      config = %ExOkex.Config{
+        api_key: "OKEX_API_KEY",
+        api_secret: Base.encode64("OKEX_API_SECRET"),
+        api_passphrase: "OKEX_API_PASSPHRASE"
+      }
+
+      response =
+        http_response(
+          %{
+            "holding" => [
+              %{
+                "avail_position" => "2",
+                "avg_cost" => "38062.7",
+                "instrument_id" => "BTC-USD-SWAP",
+                "last" => "39727.8",
+                "leverage" => "51.25",
+                "liquidation_price" => "5846.0",
+                "maint_margin_ratio" => "0.0040",
+                "margin" => "0.0000",
+                "position" => "2",
+                "realized_pnl" => "0.0000",
+                "settled_pnl" => "0.0003",
+                "settlement_price" => "41112.7",
+                "side" => "long",
+                "timestamp" => "2021-01-10T08:00:10.100Z",
+                "unrealized_pnl" => "-0.0002"
+              }
+            ],
+            "margin_mode" => "crossed",
+            "timestamp" => "2021-01-10T08:00:10.100Z"
+          },
+          200
+        )
+
+      with_mock_request(:get, response, fn ->
+        assert {:ok,
+                %{
+                  "holding" => [
+                    %{
+                      "avail_position" => "2",
+                      "avg_cost" => "38062.7",
+                      "instrument_id" => "BTC-USD-SWAP",
+                      "last" => "39727.8",
+                      "leverage" => "51.25",
+                      "liquidation_price" => "5846.0",
+                      "maint_margin_ratio" => "0.0040",
+                      "margin" => "0.0000",
+                      "position" => "2",
+                      "realized_pnl" => "0.0000",
+                      "settled_pnl" => "0.0003",
+                      "settlement_price" => "41112.7",
+                      "side" => "long",
+                      "timestamp" => "2021-01-10T08:00:10.100Z",
+                      "unrealized_pnl" => "-0.0002"
+                    }
+                  ],
+                  "margin_mode" => "crossed",
+                  "timestamp" => "2021-01-10T08:00:10.100Z"
+                }} ==
+                 Api.get_position("BTC-USD-SWAP", config)
+      end)
+    end
+  end
+
   describe ".get_position" do
     test "returns position info" do
       config = %ExOkex.Config{
