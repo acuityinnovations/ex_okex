@@ -259,4 +259,8 @@ defmodule ExOkex.Margin.Private do
   def borrow(params, config \\ nil) do
     post("#{@prefix}/accounts/borrow", params, config)
   end
+
+  def list_accounts(config \\ nil) do
+    get("#{@prefix}/accounts", %{}, config)
+  end
 end
