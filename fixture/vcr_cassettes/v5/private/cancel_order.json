@@ -1,0 +1,37 @@
+[
+  {
+    "request": {
+      "body": "{\"clOrdId\":\"bb831d77ca9b4aa58b9cab0ce09f4e21\",\"instId\":\"BTC-USDT\"}",
+      "headers": {
+        "Content-Type": "application/json",
+        "OK-ACCESS-KEY": "***",
+        "OK-ACCESS-SIGN": "***",
+        "OK-ACCESS-TIMESTAMP": "***",
+        "OK-ACCESS-PASSPHRASE": "***"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "https://www.okex.com/api/v5/trade/cancel-order"
+    },
+    "response": {
+      "binary": false,
+      "body": "{\"code\":\"0\",\"data\":[{\"clOrdId\":\"bb831d77ca9b4aa58b9cab0ce09f4e21\",\"ordId\":\"334891479269269508\",\"sCode\":\"0\",\"sMsg\":\"\"}],\"msg\":\"\"}",
+      "headers": {
+        "Date": "Mon, 12 Jul 2021 19:05:32 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "128",
+        "Connection": "keep-alive",
+        "Set-Cookie": "locale=en_US; Max-Age=604800; Expires=Mon, 19-Jul-2021 19:05:32 GMT; Path=/",
+        "X-BrokerID": "0",
+        "Strict-Transport-Security": "max-age=63072000; includeSubdomains; preload",
+        "CF-Cache-Status": "DYNAMIC",
+        "Expect-CT": "max-age=604800, report-uri=\"https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct\"",
+        "Server": "cloudflare",
+        "CF-RAY": "66dc8b2a7e1f018f-SIN"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]
