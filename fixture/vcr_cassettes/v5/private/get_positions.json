@@ -1,0 +1,38 @@
+[
+  {
+    "request": {
+      "body": "",
+      "headers": {
+        "Content-Type": "application/json",
+        "OK-ACCESS-KEY": "***",
+        "OK-ACCESS-SIGN": "***",
+        "OK-ACCESS-TIMESTAMP": "***",
+        "OK-ACCESS-PASSPHRASE": "***"
+      },
+      "method": "get",
+      "options": [],
+      "request_body": "",
+      "url": "https://www.okex.com/api/v5/account/positions?instId=BTC-USDT-SWAP&instType=SWAP"
+    },
+    "response": {
+      "binary": false,
+      "body": "{\"code\":\"0\",\"data\":[{\"adl\":\"5\",\"availPos\":\"2\",\"avgPx\":\"33269\",\"cTime\":\"1626117052507\",\"ccy\":\"USDT\",\"deltaBS\":\"\",\"deltaPA\":\"\",\"gammaBS\":\"\",\"gammaPA\":\"\",\"imr\":\"\",\"instId\":\"BTC-USDT-SWAP\",\"instType\":\"SWAP\",\"interest\":\"0\",\"last\":\"33300\",\"lever\":\"20\",\"liab\":\"\",\"liabCcy\":\"\",\"liqPx\":\"31748.517880462077\",\"margin\":\"33.269\",\"mgnMode\":\"isolated\",\"mgnRatio\":\"11.297341170552103\",\"mmr\":\"2.6638699125628618\",\"notionalUsd\":\"665.8276249703059\",\"optVal\":\"\",\"pos\":\"2\",\"posCcy\":\"\",\"posId\":\"334869990763552771\",\"posSide\":\"long\",\"thetaBS\":\"\",\"thetaPA\":\"\",\"tradeId\":\"95547931\",\"uTime\":\"1626117052507\",\"upl\":\"0.5874781407153933\",\"uplRatio\":\"0.0176584249816747\",\"vegaBS\":\"\",\"vegaPA\":\"\"}],\"msg\":\"\"}",
+      "headers": {
+        "Date": "Mon, 12 Jul 2021 19:11:37 GMT",
+        "Content-Type": "application/json",
+        "Transfer-Encoding": "chunked",
+        "Connection": "keep-alive",
+        "Vary": "Accept-Encoding",
+        "Set-Cookie": "locale=en_US; Max-Age=604800; Expires=Mon, 19-Jul-2021 19:11:37 GMT; Path=/",
+        "X-BrokerID": "0",
+        "Strict-Transport-Security": "max-age=63072000; includeSubdomains; preload",
+        "CF-Cache-Status": "DYNAMIC",
+        "Expect-CT": "max-age=604800, report-uri=\"https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct\"",
+        "Server": "cloudflare",
+        "CF-RAY": "66dc9413af4f5647-SIN"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]

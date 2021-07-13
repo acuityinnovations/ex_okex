@@ -1,0 +1,39 @@
+[
+  {
+    "request": {
+      "body": "",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "method": "get",
+      "options": [],
+      "request_body": "",
+      "url": "https://www.okex.com/api/v5/market/ticker?instId=BTC-USD-SWAP"
+    },
+    "response": {
+      "binary": false,
+      "body": "{\"code\":\"0\",\"msg\":\"\",\"data\":[{\"instType\":\"SWAP\",\"instId\":\"BTC-USD-SWAP\",\"last\":\"33154\",\"lastSz\":\"5\",\"askPx\":\"33147.6\",\"askSz\":\"468\",\"bidPx\":\"33147.5\",\"bidSz\":\"3082\",\"open24h\":\"33950\",\"high24h\":\"34704.1\",\"low24h\":\"33030.4\",\"volCcy24h\":\"18414.0505\",\"vol24h\":\"6237307\",\"ts\":\"1626115144757\",\"sodUtc0\":\"34267.8\",\"sodUtc8\":\"33333\"}]}",
+      "headers": {
+        "Date": "Mon, 12 Jul 2021 18:39:07 GMT",
+        "Content-Type": "application/json",
+        "Transfer-Encoding": "chunked",
+        "Connection": "keep-alive",
+        "Vary": "Accept-Encoding",
+        "X-Content-Type-Options": "nosniff",
+        "X-XSS-Protection": "1; mode=block",
+        "Cache-Control": "no-cache, no-store, max-age=0, must-revalidate",
+        "Pragma": "no-cache",
+        "Expires": "0",
+        "X-Frame-Options": "DENY",
+        "X-BrokerID": "0",
+        "Strict-Transport-Security": "max-age=63072000; includeSubdomains; preload",
+        "CF-Cache-Status": "DYNAMIC",
+        "Expect-CT": "max-age=604800, report-uri=\"https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct\"",
+        "Server": "cloudflare",
+        "CF-RAY": "66dc64769dd71a3a-SIN"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]

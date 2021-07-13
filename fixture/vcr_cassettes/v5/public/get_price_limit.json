@@ -1,0 +1,33 @@
+[
+  {
+    "request": {
+      "body": "",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "method": "get",
+      "options": [],
+      "request_body": "",
+      "url": "https://www.okex.com/api/v5/public/price-limit?instId=BTC-USD-SWAP"
+    },
+    "response": {
+      "binary": false,
+      "body": "{\"code\":\"0\",\"data\":[{\"buyLmt\":\"33788.2\",\"instId\":\"BTC-USD-SWAP\",\"instType\":\"SWAP\",\"sellLmt\":\"32463.1\",\"ts\":\"1626115371559\"}],\"msg\":\"\"}",
+      "headers": {
+        "Date": "Mon, 12 Jul 2021 18:42:51 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "134",
+        "Connection": "keep-alive",
+        "Set-Cookie": "locale=en_US; Max-Age=604800; Expires=Mon, 19-Jul-2021 18:42:51 GMT; Path=/",
+        "X-BrokerID": "0",
+        "Strict-Transport-Security": "max-age=63072000; includeSubdomains; preload",
+        "CF-Cache-Status": "DYNAMIC",
+        "Expect-CT": "max-age=604800, report-uri=\"https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct\"",
+        "Server": "cloudflare",
+        "CF-RAY": "66dc69f00c942fa7-SIN"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]
