@@ -1,0 +1,33 @@
+[
+  {
+    "request": {
+      "body": "",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "method": "get",
+      "options": [],
+      "request_body": "",
+      "url": "https://www.okex.com/api/v5/public/mark-price?instId=BTC-USDT&instType=MARGIN"
+    },
+    "response": {
+      "binary": false,
+      "body": "{\"code\":\"0\",\"data\":[{\"instId\":\"BTC-USDT\",\"instType\":\"MARGIN\",\"markPx\":\"33119.6323201832240862\",\"ts\":\"1626115304389\"}],\"msg\":\"\"}",
+      "headers": {
+        "Date": "Mon, 12 Jul 2021 18:41:44 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "127",
+        "Connection": "keep-alive",
+        "Set-Cookie": "locale=en_US; Max-Age=604800; Expires=Mon, 19-Jul-2021 18:41:44 GMT; Path=/",
+        "X-BrokerID": "0",
+        "Strict-Transport-Security": "max-age=63072000; includeSubdomains; preload",
+        "CF-Cache-Status": "DYNAMIC",
+        "Expect-CT": "max-age=604800, report-uri=\"https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct\"",
+        "Server": "cloudflare",
+        "CF-RAY": "66dc684c4eee2f4f-SIN"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]

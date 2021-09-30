@@ -1,0 +1,37 @@
+[
+  {
+    "request": {
+      "body": "{\"clOrdId\":\"bb831d77ca9b4aa58b9cab0ce09f4e21\",\"instId\":\"BTC-USDT\",\"newPx\":\"31000\",\"newSz\":\"0.0001\"}",
+      "headers": {
+        "Content-Type": "application/json",
+        "OK-ACCESS-KEY": "***",
+        "OK-ACCESS-SIGN": "***",
+        "OK-ACCESS-TIMESTAMP": "***",
+        "OK-ACCESS-PASSPHRASE": "***"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "https://www.okex.com/api/v5/trade/amend-order"
+    },
+    "response": {
+      "binary": false,
+      "body": "{\"code\":\"0\",\"data\":[{\"clOrdId\":\"bb831d77ca9b4aa58b9cab0ce09f4e21\",\"ordId\":\"334891479269269508\",\"reqId\":\"\",\"sCode\":\"0\",\"sMsg\":\"\"}],\"msg\":\"\"}",
+      "headers": {
+        "Date": "Mon, 12 Jul 2021 19:04:11 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "139",
+        "Connection": "keep-alive",
+        "Set-Cookie": "locale=en_US; Max-Age=604800; Expires=Mon, 19-Jul-2021 19:04:11 GMT; Path=/",
+        "X-BrokerID": "0",
+        "Strict-Transport-Security": "max-age=63072000; includeSubdomains; preload",
+        "CF-Cache-Status": "DYNAMIC",
+        "Expect-CT": "max-age=604800, report-uri=\"https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct\"",
+        "Server": "cloudflare",
+        "CF-RAY": "66dc8932ab1a1708-SIN"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]
