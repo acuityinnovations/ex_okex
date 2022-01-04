@@ -338,4 +338,31 @@ defmodule ExOkex.V5.Private do
   def get_open_orders(params, config \\ nil) do
     get("#{@prefix}/trade/orders-pending", params, config)
   end
+
+  @doc """
+  Borrow asset.
+
+  https://www.okex.com/docs-v5/en/#rest-api-account-vip-loans-borrow-and-repay
+
+  iex> ExOkex.V5.Private.borrow(%{ccy: "USDT", amt: "100"}, config)
+
+  iex> {:ok,
+         %{
+           "code" => "0",
+           "data" => [
+             %{
+               "amt" => "102",
+               "availLoan" => "97",
+               "ccy": "USDT",
+               "loanQuota" => "6000000",
+               "posLoan" => "0",
+               "side" => "repay",
+               "usedLoan" => "97"
+             }
+           "msg" => ""
+         }}
+  """
+  def borrow(params, config \\ nil) do
+    get("#{@prefix}/account/borrow-repay", Map.put(params, :side, "borrow"), config)
+  end
 end

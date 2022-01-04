@@ -4,7 +4,7 @@ defmodule ExOkex.Mixfile do
   def project do
     [
       app: :ex_okex,
-      version: "0.6.0",
+      version: "0.7.0",
       elixir: "~> 1.6",
       build_embedded: Mix.env() == :prod,
       start_permanent: Mix.env() == :prod,
@@ -13,7 +13,7 @@ defmodule ExOkex.Mixfile do
       package: package(),
       name: "ExOkex",
       description: "OKEx API client for Elixir",
-      source_url: "https://github.com/yurikoval/ex_okex"
+      source_url: "https://github.com/acuityinnovations/ex_okex"
     ]
   end
 
@@ -45,9 +45,9 @@ defmodule ExOkex.Mixfile do
   defp package do
     [
       name: :ex_okex,
-      maintainers: ["Yuri Koval'ov"],
+      maintainers: ["Yuri Koval'ov", "Acuity Innovations"],
       licenses: ["MIT"],
-      links: %{"GitHub" => "https://github.com/yurikoval/ex_okex"}
+      links: %{"GitHub" => "https://github.com/acuityinnovations/ex_okex"}
     ]
   end
 end
