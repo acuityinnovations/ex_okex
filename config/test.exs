@@ -1,9 +1,8 @@
-use Mix.Config
+import Config
 
 config :ex_okex,
   api_key: {:system, "OKEX_TEST_API_KEY"},
-  # Base.encode64("OKEX_TEST_API_SECRET")
-  api_secret: {:system, "R0RBWF9URVNUX0FQSV9TRUNSRVQ="},
+  api_secret: {:system, "OKEX_TEST_API_SECRET"},
   api_passphrase: {:system, "OKEX_TEST_API_PASSPHRASE"}
 
 config :exvcr,
