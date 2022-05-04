@@ -13,8 +13,14 @@ defmodule ExOkex.Auth do
     body = if Enum.empty?(body), do: "", else: Jason.encode!(body)
     data = "#{timestamp}#{method}#{path}#{body}"
 
-    :sha256
-    |> :crypto.hmac(api_secret, data)
-    |> Base.encode64()
+    if Code.ensure_loaded?(:crypto) and function_exported?(:crypto, :mac, 4) do
+      :hmac
+      |> :crypto.mac(:sha256, api_secret, data)
+      |> Base.encode16()
+    else
+      :sha256
+      |> :crypto.hmac(api_secret, data)
+      |> Base.encode16()
+    end
   end
 end
